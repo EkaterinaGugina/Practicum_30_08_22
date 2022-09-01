@@ -6,64 +6,66 @@
 //18 20
 //15 18
 
-
-
-void FillArray(double[,] matr)                  //заполнение вещественными числами и печать массива
+int[,] FillArray(int numstr, int numcol)              //заполнение массива
+{
+    int[,] matr = new int[numstr, numcol];
+    for (int i = 0; i < numstr; i++)
+    {
+        for (int j = 0; j < numcol; j++)
+        {
+            matr[i,j] = new Random().Next(1,10);    
+        }
+    }
+    return matr;
+}
+void PrintArray(int[,] matr)              //печать массива
 {
     for (int i = 0; i < matr.GetLength(0); i++)
     {
         for (int j = 0; j < matr.GetLength(1); j++)
         {
-            matr[i,j] = new Random().NextDouble() * 20 - 10;    
-            Console.Write($"{Math.Round(matr[i, j], 1)}\t");
+            Console.Write($"{matr[i, j]} ");
         }
         Console.WriteLine();
     }
 }
-Console.Write("Введите размер матрицы. Укажите количество строк m = ");
-int m = Convert.ToInt32(Console.ReadLine());
-Console.Write("  и столбцов n = ");
-int n = Convert.ToInt32(Console.ReadLine());
-double[,] matrix = new double[m, n];
-FillArray(matrix);
-
-
-int[,] FillArray1(int[,] matr)                   //заполнение и печать массива
+void MultiplMatrix(int[,] matr1, int[,] matr2)
 {
-    int[,] matrix = new int[matr.GetLength(0), matr.GetLength(1)];
-    for (int i = 0; i < matr.GetLength(0); i++)
+    int[,] matrixAB = new int[matr1.GetLength(0), matr2.GetLength(1)];
+    for (int i = 0; i < matr1.GetLength(0); i++)
     {
-        for (int j = 0; j < matr.GetLength(1); j++)
+        for (int j = 0; j < matr2.GetLength(1); j++)
         {
-            matrix[i,j] = new Random().Next(-10, 10);    
-            Console.Write($"{matrix[i, j]}\t");
+            for (int k = 0; k < matr1.GetLength(1); k++)
+            {
+                matrixAB[i, j] += matr1[i, k] * matr2[k, j];
+            }
+            Console.Write($"{matrixAB[i, j]} ");
         }
         Console.WriteLine();
     }
-    return  matrix;
-}
+} 
 
-void SeachPosition(int[,] matr, int pos)       //поиск элемента по индексу
+Console.Clear();
+Console.Write("Введите размер первой матрицы: укажите количество строк m1 = ");
+int m1 = Convert.ToInt32(Console.ReadLine());
+Console.Write("  и столбцов n1 = ");
+int n1 = Convert.ToInt32(Console.ReadLine());
+Console.Write($"Введите размер второй матрицы: ПОМНИТЕ, что УМНОЖИТЬ МЫ СМОЖЕМ матрицы, только если число столбцов {n1} первой матрицы будет равно числу строк второй матрицы. Укажите количество строк m2 = ");
+int m2 = Convert.ToInt32(Console.ReadLine());
+Console.Write("  и столбцов n2 = ");
+int n2 = Convert.ToInt32(Console.ReadLine());
+if (m2 != n1) 
 {
-    int a = pos / 10;
-    int b = pos % 10;
-    if (a >= matr.GetLength(0) || b >= matr.GetLength(1))
-    {
-        Console.Write($"Такого элемента в матрице размера {matr.GetLength(0)}x{matr.GetLength(1)} нет");
-    }
-    else
-    {
-        Console.Write($"Элемент в {a + 1}-той строке и {b + 1}-том столбце равен {matr[a, b]}");
-    }
+    Console.WriteLine("Матрицы НЕЛЬЗЯ умножить!");
+    Console.WriteLine($"Число столбцов {n1} первой матрицы неравно числу строк {m2} второй матрицы!");
+    Console.WriteLine($"Мы возьмем его правильно: m2 = n1 = {n1}");
+    m2 = n1;
 }
-Console.WriteLine("Создаем матрицу. Количество строк m и столбцов n будут случайными, но не более 10");
-int m1 = Convert.ToInt32(new Random().Next(1, 10));
-int n1 = Convert.ToInt32(new Random().Next(1, 10));
-int[,] array = new int[m1, n1];
-int[,] matrix1 = FillArray1(array);
+int[,] matrixA = FillArray(m1, n1);
+int[,] matrixB = FillArray(m2, n2);
+PrintArray(matrixA);
 Console.WriteLine();
-Console.WriteLine("Какой элемент вы хотели бы найти? Введите индекс в формате ab, где a - номер строки,  b - номер столбца, с учетом, что нумерация идет с '0'");
-int position = Convert.ToInt32(Console.ReadLine());
-SeachPosition(matrix1, position);
-
- 
+PrintArray(matrixB);
+Console.WriteLine();
+MultiplMatrix(matrixA, matrixB);
