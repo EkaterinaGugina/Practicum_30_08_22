@@ -29,19 +29,25 @@ for (int z = min; z <= max; z++)
     if (count != 0) Console.WriteLine($"'{z}' - {count} раз");
 }
 
-// второй способ
-//int count = 0;
-//int[,] result_arr = new int[array.GetLength(0) + 1, 2];
-//result_arr[0,0] = array[0,0];
-//for (int i = 0; i < array.GetLength(0); i++)
-   // {
-        //for (int j = 0; j < array.GetLength(1); j++)
-        //{
-        //    if (array[i,j] == result_arr[i,0]) 
-        //    {
-                
-        //        count++;
-        //    }
-       // }
-    //}
+//второй способ
+// int count = 0;
+// int[,] result_arr = new int[array.GetLength(0)+1, 2];
+// result_arr[0,0] = array[0,0];
+// int k = 0;
+// while (k < array.GetLength(0)*array.GetLength(1))
+// {
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             if (result_arr[k, 0] == array[i, j])
+//             {
+//                 count++;
+//                 result_arr[k, 1] = count;
+//             }
+//             result_arr[k + i + j, 0] = array[i, j + 1];
+//         }
+//     }
+//     k++;
+// } 
     
