@@ -14,7 +14,7 @@ int[,] FillArray(int[,] matr)                  //заполнение и печ�
     }
     return matr;
 }
-void PrintArray(int[,] matr)                  //заполнение и печать массива
+void PrintArray(int[,] matr)                  //печать массива
 {
     for (int i = 0; i < matr.GetLength(0); i++)
     {
