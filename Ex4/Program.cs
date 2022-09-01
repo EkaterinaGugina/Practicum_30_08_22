@@ -23,7 +23,7 @@ int[,] FillArray(int[,] matr)                   //заполнение и печ
     }
     return  matr;
 }
-int[] SeachMinElemArray(int[,] array)   // поиск индекса мин эл-та матрицы и удаление этих строки и столбца
+int[] SeachMinElemArray(int[,] array)   // поиск индекса мин эл-та матрицы
 {
     int[] ind_min = {0,0};
     for (int i = 0; i < array.GetLength(0); i++)
