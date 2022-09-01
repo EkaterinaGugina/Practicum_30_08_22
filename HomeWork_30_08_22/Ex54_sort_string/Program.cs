@@ -1,5 +1,5 @@
 ﻿// Ex54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
-int[,] FillArray(int[,] matr)                  //заполнение и печать неупорядоченного массива из рандомных чисел
+int[,] FillArray(int[,] matr)       //заполнение и печать неупорядоченного массива из рандомных чисел
 {
     int[,] matrix = new int[matr.GetLength(0), matr.GetLength(1)];
     for (int i = 0; i < matr.GetLength(0); i++)
@@ -19,14 +19,14 @@ int[,] SortArray(int[,] matr)                      //сортировка по �
         {
             for (int j = 0; j < matr.GetLength(1) - 1; j++)
             {
-                int maxPosition = j;
+                int max_position = j;
                 for (int k = j + 1; k < matr.GetLength(1); k++)
                 {
-                    if(matr[i, k] > matr[i, maxPosition])   maxPosition = k;
+                    if(matr[i, k] > matr[i, max_position])   max_position = k;
                 }
                     int current = matr[i, j];
-                    matr[i, j] = matr[i, maxPosition];
-                    matr[i, maxPosition] = current;
+                    matr[i, j] = matr[i, max_position];
+                    matr[i, max_position] = current;
             }
         }
         return matr;
