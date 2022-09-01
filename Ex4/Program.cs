@@ -37,7 +37,7 @@ int[] SeachMinElemArray(int[,] array)   // поиск индекса мин эл
                 }
             }
     }
-    //Console.WriteLine($"Индекс минимального элемента: {ind_min[0]}, {ind_min[1]}");
+    //Console.WriteLine($"Индекс минимального элемента {array[ind_min[0],ind_min[1]]}: {ind_min[0]}, {ind_min[1]}");
     return ind_min;
 }
 void PrintArray(int[,] matr, int[] position_min_element)                   //заполнение и печать массива
