@@ -1,18 +1,11 @@
-﻿// Ex56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
-//Например, задан массив:
-//1 4 7 2
-//5 9 2 3
-//8 4 2 4
-//5 2 6 7
-//Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+﻿// Ex56: Задайте прямоугольный двумерный массив. Программа считает сумму элементов в каждой 
+//строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 
-
-
-int[] FillArraySumStr(int[,] matr)                  //заполнение и печать массива и создание массива из сумм всех строк
+int[] FillArraySumStr(int[,] matr)       //создание массива из сумм всех строк
 {
+    int[] sum_str = new int[matr.GetLength(0)];
     for (int i = 0; i < matr.GetLength(0); i++)
     {
-        int[] sum_str = new int[matr.GetLength(0)];
         for (int j = 0; j < matr.GetLength(1); j++)
         {
             matr[i,j] = new Random().Next(1, 10);    
@@ -23,13 +16,13 @@ int[] FillArraySumStr(int[,] matr)                  //заполнение и п
     }
     return sum_str;
 }
-void MinSumStrArray(int[] array)         // нахождение номера миним.элемента в массиве из сумм строк
+void NumMinArray(int[] array)      // нахождение номера миним.элемента в массиве из сумм строк
 {
+    int index_min = 0;
     int i = 1;
-    int min = 0;
     while (i < array.Length)
     {
-        if(array[i] < array[min])   min = i; 
+        if(array[i] < array[index_min])   index_min = i; 
         i++;
     }
     Console.WriteLine($"Наименьшая сумма элементов в {i}-й строке");
@@ -41,4 +34,4 @@ Console.Write("  и столбцов, больше чем один:  n = ");
 int n = Convert.ToInt32(Console.ReadLine());
 int[,] matrix = new int[m, n];
 int[] sum_str_array = FillArraySumStr(matrix);
-MinSumStrArray(sum_str_array);
+NumMinArray(sum_str_array);
