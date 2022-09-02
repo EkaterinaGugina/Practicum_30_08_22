@@ -1,69 +1,32 @@
 ﻿// Ex62. Напишите программу, которая заполнит спирально массив 4 на 4.
-//Например, на выходе получается вот такой массив:
 //01 02 03 04
 //12 13 14 05
 //11 16 15 06
 //10 09 08 07
-
-
-
-void FillArray(double[,] matr)                  //заполнение вещественными числами и печать массива
+int[,] FillArray(int[,] matr)       //заполнение и печать массива
 {
-    for (int i = 0; i < matr.GetLength(0); i++)
+    int count = 0;
+    while (count < 4)
     {
-        for (int j = 0; j < matr.GetLength(1); j++)
+        int i = 0;
+        for (int k = 0; k < 4; k++)
         {
-            matr[i,j] = new Random().NextDouble() * 20 - 10;    
-            Console.Write($"{Math.Round(matr[i, j], 1)}\t");
+            matr[i, k] = 10 * i + k + 1;
+            Console.Write($"{matr[i, k]} ");
+        }
+        Console.WriteLine();
+        int j = 3;
+        for (int k = 1; k < 4; k++)
+        {
+            matr[k, j] = 10 * (- j -1) + j + 2;
+            Console.Write($"{matr[k, j]} ");
         }
         Console.WriteLine();
     }
+
 }
-Console.Write("Введите размер матрицы. Укажите количество строк m = ");
-int m = Convert.ToInt32(Console.ReadLine());
-Console.Write("  и столбцов n = ");
-int n = Convert.ToInt32(Console.ReadLine());
-double[,] matrix = new double[m, n];
+
+for (int i = 0; i < matr.GetLength(0); i++)
+int[,] matrix = new int[4, 4];
 FillArray(matrix);
-
-
-int[,] FillArray1(int[,] matr)                   //заполнение и печать массива
-{
-    int[,] matrix = new int[matr.GetLength(0), matr.GetLength(1)];
-    for (int i = 0; i < matr.GetLength(0); i++)
-    {
-        for (int j = 0; j < matr.GetLength(1); j++)
-        {
-            matrix[i,j] = new Random().Next(-10, 10);    
-            Console.Write($"{matrix[i, j]}\t");
-        }
-        Console.WriteLine();
-    }
-    return  matrix;
-}
-
-void SeachPosition(int[,] matr, int pos)       //поиск элемента по индексу
-{
-    int a = pos / 10;
-    int b = pos % 10;
-    if (a >= matr.GetLength(0) || b >= matr.GetLength(1))
-    {
-        Console.Write($"Такого элемента в матрице размера {matr.GetLength(0)}x{matr.GetLength(1)} нет");
-    }
-    else
-    {
-        Console.Write($"Элемент в {a + 1}-той строке и {b + 1}-том столбце равен {matr[a, b]}");
-    }
-}
-Console.WriteLine("Создаем матрицу. Количество строк m и столбцов n будут случайными, но не более 10");
-int m1 = Convert.ToInt32(new Random().Next(1, 10));
-int n1 = Convert.ToInt32(new Random().Next(1, 10));
-int[,] array = new int[m1, n1];
-int[,] matrix1 = FillArray1(array);
-Console.WriteLine();
-Console.WriteLine("Какой элемент вы хотели бы найти? Введите индекс в формате ab, где a - номер строки,  b - номер столбца, с учетом, что нумерация идет с '0'");
-int position = Convert.ToInt32(Console.ReadLine());
-SeachPosition(matrix1, position);
-
- 
 

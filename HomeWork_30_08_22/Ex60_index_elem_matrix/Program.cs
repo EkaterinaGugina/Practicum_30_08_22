@@ -25,4 +25,22 @@ void FillArray(int[, ,] matr)
 int[, ,] matrix = new int[2, 2, 2];
 FillArray(matrix);
 
- 
+
+
+
+ int[] GetUniqueSequencesWithMix(
+      int count, 
+      int startValue = 10)
+ {
+  int[] set = new int[count]; 
+  int size = set.Length; 
+  for (int i = 0; i < size; i++)
+   set[i] = startValue + i;
+
+  for (int i=0; i<size-1; i++)
+  {
+   int pos = Random.Shared.Next(i + 1, size);
+   (set[i], set[pos]) = (set[pos], set[i]);
+  } 
+ return set; 
+}
