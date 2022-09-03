@@ -3,30 +3,54 @@
 //12 13 14 05
 //11 16 15 06
 //10 09 08 07
-int[,] FillArray(int[,] matr)       //заполнение и печать массива
+void PrintArray(int[,] matr)
 {
-    int count = 0;
-    while (count < 4)
+    for (int i = 0; i < matr.GetLength(0); i++)
     {
-        int i = 0;
-        for (int k = 0; k < 4; k++)
+        for (int j = 0; j < matr.GetLength(1); j++)
         {
-            matr[i, k] = 10 * i + k + 1;
-            Console.Write($"{matr[i, k]} ");
-        }
-        Console.WriteLine();
-        int j = 3;
-        for (int k = 1; k < 4; k++)
-        {
-            matr[k, j] = 10 * (- j -1) + j + 2;
-            Console.Write($"{matr[k, j]} ");
+            Console.Write($"{matr[i, j]}\t");
         }
         Console.WriteLine();
     }
-
 }
-
-for (int i = 0; i < matr.GetLength(0); i++)
-int[,] matrix = new int[4, 4];
-FillArray(matrix);
+int[,] FillArraySpiral(int[,] matr)
+{
+    int count = 0;
+    int k = 1;
+    while (count < matr.GetLength(0) / 2 + 1)
+    {
+        int i = count;
+        for (int y = i; y < matr.GetLength(1) - count - 1; y++)     // проход направо
+        {
+            matr[i, y] = k;
+            k++;
+        }
+        int j = matr.GetLength(1) - count - 1;
+        for (int x = count; x < matr.GetLength(0) - count - 1; x++)  // проход вниз
+        {
+            matr[x, j] = k;
+            k++;
+        }
+        i = matr.GetLength(0) - count - 1;
+        for (int y = matr.GetLength(1) - count - 1; y > count; j--)     // проход налево
+        {
+            matr[i, y] = k;
+            k++;
+        }
+        j = count;
+        for (int x = matr.GetLength(0) - count - 1; x > count; x--)     // проход вверх
+        {
+            matr[x, j] = k;
+            k++;
+        }
+        count++;
+    }
+    return matr;
+}
+int m = 4;
+int n = 4;
+int[,] matrix = new int[m, n];
+int [,] resultSpiralArray = FillArraySpiral(matrix);
+PrintArray(resultSpiralArray);
 
