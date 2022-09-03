@@ -5,26 +5,7 @@
 //34(1,0,0) 41(1,1,0)
 //27(0,0,1) 90(0,1,1)
 //26(1,0,1) 55(1,1,1)
-int Sravn(int[,,] arr, int N, int x, int y, int z)
-{
-    for (int i = 0; i < x; i++)
-    {  
-        for (int j = 0; j < y; j++)
-        {
-            for (int k = 0; k < z; k++)
-            {
-                if (arr[x, y, z] == N)
-                {
-                    Console.WriteLine("Такой элемент уже есть, меняем его на другой");
-                    arr[x, y, z] = new Random().Next(10, 100);;
-                    break;
-                }
-            }
-        }
-    }
-    return arr[x, y, z];
-}
-void FillArrayCondition(int[,,] matr)
+void PrintArray(int[,,] matr)
 {
     for (int i = 0; i < matr.GetLength(0); i++)
     {
@@ -32,18 +13,57 @@ void FillArrayCondition(int[,,] matr)
         {
             for (int k = 0; k < matr.GetLength(2); k++)
             {
-                //matr[i, j, k] = new Random().Next(10, 100);
-                int count = 1;
-                while (count <= (i + 1) * (j + 1) * (k + 1))
-                {
-                    matr[i, j, k] = Sravn(matr, matr[i, j, k], i, j, k);
-                    count++;
-                }       
                 Console.Write($"{matr[i, j, k]}({i}{j}{k})\t");
             }
             Console.WriteLine();
         }
     }
 }
-int[,,] matrix = new int[2, 2, 2];
-FillArrayCondition(matrix);
+int Sravn(int[,,] arr, int marker)
+{
+    int result = -1;
+    for (int i = 0; i < arr.GetLength(0); i++)
+    {
+        for (int j = 0; j < arr.GetLength(1); j++)
+        {
+            for (int k = 0; k < arr.GetLength(2); k++)
+            {
+                if (arr[i, j, k] == marker)
+                {
+                    result = new Random().Next(10, 100);
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+int[,,] FillArrayCondition(int[,,] matr)
+{
+    int count = 1;
+    int marker = 0;
+    matr[0, 0, 0] = new Random().Next(10, 100);
+    while (count <= matr.GetLength(0) * matr.GetLength(1) * matr.GetLength(2))
+    {
+        for (int i = 0; i < matr.GetLength(0); i++)
+        {
+            for (int j = 0; j < matr.GetLength(1); j++)
+            {
+                for (int k = 0; k < matr.GetLength(2); k++)
+                {
+
+                    matr[i, j, k] = new Random().Next(10, 100);
+                    marker = matr[i, j, k];
+                    int result = Sravn(matr, marker);
+                    if (result == -1) Console.WriteLine("Одинаковых элементов нет");
+                    else {matr[i, j, k] = result;}
+                }
+            }
+        }
+        count++;
+    }
+    return matr;
+}
+int[,,] matrix = new int[4, 2, 3];
+int [,,] resultArray = FillArrayCondition(matrix);
+PrintArray(resultArray);
