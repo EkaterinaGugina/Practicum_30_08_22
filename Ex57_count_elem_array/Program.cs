@@ -1,34 +1,38 @@
 ﻿//Ex57: Составить частотный словарь элементов двумерного массива. Частотный словарь содержит информацию о том, сколько раз встречается элемент входных данных.
 
-int m = new Random().Next(1, 10);
-int n = new Random().Next(1, 10);
-int[,] array = new int[m, n];
-int max = array[0,0];
-int min = array[0,0];
-for (int i = 0; i < array.GetLength(0); i++)
-{
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-        array[i, j] = new Random().Next(1, 10);
-        Console.Write($"{array[i, j]}\t");
-        if (array[i, j] > max) max = array[i, j];
-        if (array[i, j] < min) min = array[i, j];
-    }
-    Console.WriteLine();
-}
-for (int z = min; z <= max; z++)
-{
-    int count = 0;
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-           if (array[i, j] == z) count++;
-        }
-    }
-    if (count != 0) Console.WriteLine($"'{z}' - {count} раз");
-}
-bool ValueWasUsed(int number, int[,] matrix)                // Метод, определяющий наличие элемента в массиве
+// 1 СПОСОБ - найти самый> и самый< элементы и циклом от них подсчитать сколько кто встретился раз
+
+// int m = new Random().Next(1, 10);
+// int n = new Random().Next(1, 10);
+// int[,] array = new int[m, n];
+// int max = array[0,0];
+// int min = array[0,0];
+// for (int i = 0; i < array.GetLength(0); i++)
+// {
+//     for (int j = 0; j < array.GetLength(1); j++)
+//     {
+//         array[i, j] = new Random().Next(1, 10);
+//         Console.Write($"{array[i, j]}\t");
+//         if (array[i, j] > max) max = array[i, j];
+//         if (array[i, j] < min) min = array[i, j];
+//     }
+//     Console.WriteLine();
+// }
+// for (int z = min; z <= max; z++)
+// {
+//     int count = 0;
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//            if (array[i, j] == z) count++;
+//         }
+//     }
+//     if (count != 0) Console.WriteLine($"'{z}' - {count} раз");
+
+// ВТОРОЙ СПОСОБ - ОБЩИЙ ПОДХОД
+
+bool ValueWasUsed(int number, int[,] matrix)              // Метод, определяющий наличие элемента в массиве
 {
     bool numExists = false;
     for (int i = 0; i < matrix.GetLength(0); i++)
@@ -46,7 +50,7 @@ bool ValueWasUsed(int number, int[,] matrix)                // Метод, оп�
     if (!numExists) return false;
     else return true;
 }
-void ShowCountOfRepetitons(int number, int[,] matrix)           // Метод, определяющий количество повторений определенного элемента в массиве
+void ShowCountOfRepetitons(int number, int[,] matrix)       // Метод, определяющий количество повторений определенного элемента в массиве
 {
     int count = 0;
     for (int i = 0; i < matrix.GetLength(0); i++)
@@ -59,12 +63,13 @@ void ShowCountOfRepetitons(int number, int[,] matrix)           // Метод, �
     Console.WriteLine($"Элемент {number} встречается {count} раз");
 }
 
+var rand = new Random();
 int rows = rand.Next(2, 10);
 int cols = rand.Next(2, 10);
 int[,] numbers = new int[rows, cols];
-FillMatrix(numbers);
-PrintMatrix(numbers);
-Console.WriteLine();
+// FillMatrix(numbers);
+// PrintMatrix(numbers);
+// Console.WriteLine();
 
 int[,] usedValues = new int[rows, cols];                        // Массив для значений элементов, количество повторений которых мы уже посчитали
 bool valueUsed;
@@ -80,7 +85,8 @@ for (int i = 0; i < numbers.GetLength(0); i++)
         }
     }
 }
-//второй способ
+
+// третий способ - мой недоделанный
 // int m = new Random().Next(1, 10);
 // int n = new Random().Next(1, 10);
 // int[,] array = new int[m, n];
